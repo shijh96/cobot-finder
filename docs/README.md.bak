@@ -1,0 +1,30 @@
+# Cobot Finder
+
+**帮制造业企业选到最合适的协作机器人** — 制造业的 "G2 for Cobots"
+
+## 项目文档
+
+| 文档 | 内容 |
+|------|------|
+| [01-project-overview.md](docs/01-project-overview.md) | 项目概览、定位、竞品分析、技术栈 |
+| [02-semrush-keyword-research.md](docs/02-semrush-keyword-research.md) | Semrush 关键词调研完整数据（8 个种子词、Top 20 蓝海关键词、内容日历） |
+| [03-business-model.md](docs/03-business-model.md) | 4 种盈利模式详解、收入预期、KPI |
+| [04-product-spec.md](docs/04-product-spec.md) | 产品功能设计、UI 原型、数据库 Schema |
+| [05-execution-plan.md](docs/05-execution-plan.md) | 逐周执行计划、成本预算、风险评估 |
+| [06-robotics-industry-context.md](docs/06-robotics-industry-context.md) | 机器人产业背景、Cobot 行业详情、迪士尼 Olaf 案例 |
+
+## 核心数据
+
+- **目标市场**: 美国制造业 Cobot 采购者
+- **SEO 机会**: 44,200 月搜索量，平均 KD 18%
+- **启动成本**: ~$1/月
+- **预期收入**: Month 6 → $3K-8K/月，Month 12 → $8K-20K/月
+- **主要盈利**: Lead Generation ($50-200/lead)
+
+## 技术栈
+
+- Next.js 15 + Tailwind CSS
+- Supabase (PostgreSQL)
+- Stripe (Phase 2)
+- Vercel
+- MDX Blog

@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /quote/thank-you
+
+# Host
+Host: https://cobotfinder.com
+
+# Sitemaps
+Sitemap: https://cobotfinder.com/sitemap.xml
