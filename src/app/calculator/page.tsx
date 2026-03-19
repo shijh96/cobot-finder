@@ -13,20 +13,18 @@ export default function CalculatorPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 text-sm font-medium px-4 py-1.5 rounded-full mb-4">
-            Free Tool
-          </div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
             Cobot ROI Calculator
           </h1>
-          <p className="text-gray-600 text-lg max-w-xl mx-auto">
-            Estimate payback period, annual savings, and 5-year net gain for your cobot investment — in under 60 seconds.
+          <p className="text-gray-500 text-sm max-w-xl">
+            Estimate payback period, annual savings, and 5-year net gain for your cobot
+            investment — in under 60 seconds.
           </p>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Calculator widget */}
           <div className="lg:col-span-2">
@@ -34,9 +32,9 @@ export default function CalculatorPage() {
           </div>
 
           {/* Sidebar: context */}
-          <aside className="space-y-5">
-            <div className="rounded-2xl bg-white border border-gray-200 p-5">
-              <h2 className="font-bold text-gray-900 mb-3 text-sm">How to use this calculator</h2>
+          <aside className="space-y-4">
+            <div className="rounded-lg bg-white border border-gray-200 p-5">
+              <h2 className="font-semibold text-gray-900 mb-3 text-sm">How to use this calculator</h2>
               <ol className="space-y-2 text-sm text-gray-600 list-decimal list-inside">
                 <li>Set the number of workers the cobot will replace</li>
                 <li>Enter their average hourly wage (including benefits)</li>
@@ -45,8 +43,8 @@ export default function CalculatorPage() {
               </ol>
             </div>
 
-            <div className="rounded-2xl bg-white border border-gray-200 p-5">
-              <h2 className="font-bold text-gray-900 mb-3 text-sm">What is included in cobot cost?</h2>
+            <div className="rounded-lg bg-white border border-gray-200 p-5">
+              <h2 className="font-semibold text-gray-900 mb-3 text-sm">What is included in cobot cost?</h2>
               <ul className="space-y-1.5 text-sm text-gray-600">
                 <li className="flex gap-2"><span className="text-blue-500">·</span> Robot hardware (arm + controller)</li>
                 <li className="flex gap-2"><span className="text-blue-500">·</span> End-of-arm tooling (gripper, welder)</li>
@@ -56,14 +54,14 @@ export default function CalculatorPage() {
               </ul>
             </div>
 
-            <div className="rounded-2xl bg-orange-50 border border-orange-200 p-5">
-              <p className="text-sm font-semibold text-gray-900 mb-2">Need an accurate quote?</p>
-              <p className="text-xs text-gray-600 mb-3">
+            <div className="rounded-lg bg-orange-50 border border-orange-200 p-5">
+              <p className="text-sm font-semibold text-gray-900 mb-1">Need an accurate quote?</p>
+              <p className="text-xs text-gray-500 mb-3">
                 Get real pricing from authorized distributors based on your specific application.
               </p>
               <Link
                 href="/quote"
-                className="block text-center py-2 rounded-lg bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition-colors"
+                className="block text-center py-2 rounded-md bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition-colors"
               >
                 Get Free Quote
               </Link>
@@ -72,8 +70,8 @@ export default function CalculatorPage() {
         </div>
 
         {/* Explainer section */}
-        <div className="mt-12 bg-white rounded-2xl border border-gray-200 p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
+        <div className="mt-10 bg-white rounded-lg border border-gray-200 p-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-4">
             Understanding Cobot ROI
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">

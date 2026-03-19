@@ -125,23 +125,30 @@ function ArticleJsonLd({
 function Breadcrumb({ category, title }: { category: string; title: string }) {
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 text-sm text-zinc-500 dark:text-zinc-400">
-      <ol className="flex flex-wrap items-center gap-1">
+    <nav aria-label="Breadcrumb" className="mb-5">
+      <ol className="flex flex-wrap items-center gap-0.5 text-xs text-gray-400">
         <li>
-          <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+          <Link href="/" className="hover:text-gray-600 transition-colors">
+            Home
+          </Link>
         </li>
-        <li aria-hidden="true" className="mx-1">/</li>
+        <li aria-hidden="true" className="mx-1 select-none">/</li>
         <li>
-          <Link href="/guides" className="hover:text-blue-600 transition-colors">Guides</Link>
+          <Link href="/guides" className="hover:text-gray-600 transition-colors">
+            Guides
+          </Link>
         </li>
-        <li aria-hidden="true" className="mx-1">/</li>
+        <li aria-hidden="true" className="mx-1 select-none">/</li>
         <li>
-          <Link href={`/guides?category=${category}`} className="hover:text-blue-600 transition-colors">
+          <Link
+            href={`/guides?category=${category}`}
+            className="hover:text-gray-600 transition-colors"
+          >
             {categoryLabel}
           </Link>
         </li>
-        <li aria-hidden="true" className="mx-1">/</li>
-        <li className="text-zinc-900 dark:text-zinc-100 font-medium truncate max-w-[200px] sm:max-w-none">
+        <li aria-hidden="true" className="mx-1 select-none">/</li>
+        <li className="text-gray-500 truncate max-w-[180px] sm:max-w-xs" aria-current="page">
           {title}
         </li>
       </ol>
@@ -150,14 +157,38 @@ function Breadcrumb({ category, title }: { category: string; title: string }) {
 }
 
 // ----------------------------------------------------------------
+// Category badge color map
+// ----------------------------------------------------------------
+
+const CATEGORY_COLORS: Record<string, string> = {
+  buying:    'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
+  comparison: 'bg-violet-50 text-violet-700 ring-violet-600/20',
+  industry:  'bg-amber-50  text-amber-700  ring-amber-600/20',
+  safety:    'bg-red-50    text-red-700    ring-red-600/20',
+  roi:       'bg-blue-50   text-blue-700   ring-blue-600/20',
+};
+
+function categoryBadgeClasses(category: string): string {
+  return (
+    CATEGORY_COLORS[category.toLowerCase()] ??
+    'bg-blue-50 text-blue-700 ring-blue-600/20'
+  );
+}
+
+// ----------------------------------------------------------------
 // Related Articles
 // ----------------------------------------------------------------
 
-function RelatedArticles({ currentSlug, currentCategory }: { currentSlug: string; currentCategory: string }) {
+function RelatedArticles({
+  currentSlug,
+  currentCategory,
+}: {
+  currentSlug: string;
+  currentCategory: string;
+}) {
   const allPosts = getAllPosts();
   const otherPosts = allPosts.filter((p) => p.slug !== currentSlug);
 
-  // Prefer same category, then fill with other categories
   const sameCategory = otherPosts.filter((p) => p.category === currentCategory);
   const diffCategory = otherPosts.filter((p) => p.category !== currentCategory);
   const related = [...sameCategory, ...diffCategory].slice(0, 3);
@@ -165,22 +196,31 @@ function RelatedArticles({ currentSlug, currentCategory }: { currentSlug: string
   if (related.length === 0) return null;
 
   return (
-    <section className="mt-12 border-t border-zinc-200 pt-10 dark:border-zinc-700">
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">Related Guides</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <section className="mt-12 border-t border-gray-200 pt-8" aria-labelledby="related-heading">
+      <h2
+        id="related-heading"
+        className="text-base font-semibold text-gray-900 tracking-tight mb-4"
+      >
+        Related Guides
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {related.map((post) => (
           <Link
             key={post.slug}
             href={`/guides/${post.slug}`}
-            className="group rounded-xl border border-zinc-200 p-4 hover:border-blue-300 hover:shadow-md transition-all duration-200 dark:border-zinc-700"
+            className="group flex flex-col gap-1.5 rounded-lg border border-gray-200 bg-white px-4 py-3 hover:border-blue-300 hover:bg-blue-50/30 transition-colors duration-150"
           >
-            <span className="inline-block px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-medium mb-2 dark:bg-blue-900/30 dark:text-blue-400">
-              {post.category}
-            </span>
-            <h3 className="text-sm font-semibold text-zinc-900 group-hover:text-blue-600 transition-colors leading-snug dark:text-zinc-100">
+            <div className="flex items-center gap-2">
+              <span
+                className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ring-1 ring-inset ${categoryBadgeClasses(post.category)}`}
+              >
+                {post.category}
+              </span>
+              <span className="text-xs text-gray-400">{post.readingTime}</span>
+            </div>
+            <h3 className="text-sm font-medium text-gray-800 group-hover:text-blue-700 leading-snug transition-colors">
               {post.title}
             </h3>
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{post.readingTime}</p>
           </Link>
         ))}
       </div>
@@ -199,11 +239,17 @@ export default async function GuidePage({ params }: PageProps) {
 
   const categoryLabel = post.category.charAt(0).toUpperCase() + post.category.slice(1);
   const breadcrumbItems = [
-    { name: 'Home', url: 'https://cobotfinder.com/' },
-    { name: 'Guides', url: 'https://cobotfinder.com/guides' },
+    { name: 'Home',        url: 'https://cobotfinder.com/' },
+    { name: 'Guides',      url: 'https://cobotfinder.com/guides' },
     { name: categoryLabel, url: `https://cobotfinder.com/guides?category=${post.category}` },
-    { name: post.title, url: `https://cobotfinder.com/guides/${slug}` },
+    { name: post.title,    url: `https://cobotfinder.com/guides/${slug}` },
   ];
+
+  const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 
   return (
     <>
@@ -216,45 +262,66 @@ export default async function GuidePage({ params }: PageProps) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbItems)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbItems)),
+        }}
       />
 
-      <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+
         {/* Breadcrumb */}
         <Breadcrumb category={post.category} title={post.title} />
 
         {/* Header */}
-        <header className="mb-10">
-          <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-zinc-500 dark:text-zinc-400">
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-            <span aria-hidden="true">&middot;</span>
-            <span>{post.readingTime}</span>
-            <span aria-hidden="true">&middot;</span>
-            <a
+        <header className="mb-8 pb-7 border-b border-gray-200">
+          {/* Meta row: category badge + reading time + date */}
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <Link
               href={`/guides?category=${post.category}`}
-              className="rounded-full bg-blue-50 px-3 py-0.5 text-xs font-medium text-blue-700 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400"
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset transition-opacity hover:opacity-80 ${categoryBadgeClasses(post.category)}`}
             >
-              {post.category}
-            </a>
+              {categoryLabel}
+            </Link>
+            <span className="text-gray-300" aria-hidden="true">|</span>
+            <span className="text-xs text-gray-500">{post.readingTime}</span>
+            <span className="text-gray-300" aria-hidden="true">|</span>
+            <time
+              dateTime={post.date}
+              className="text-xs text-gray-500"
+            >
+              {formattedDate}
+            </time>
           </div>
 
-          <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-100">
+          {/* Title */}
+          <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 leading-snug sm:text-3xl">
             {post.title}
           </h1>
 
-          <p className="mt-4 text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          {/* Description */}
+          <p className="mt-3 text-sm leading-relaxed text-gray-500 sm:text-base">
             {post.description}
           </p>
         </header>
 
         {/* MDX body */}
-        <div className="prose prose-zinc max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-a:text-blue-600 dark:prose-a:text-blue-400">
+        <div
+          className="
+            prose prose-gray max-w-none
+            prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-gray-900
+            prose-h2:text-xl prose-h3:text-lg
+            prose-p:text-gray-700 prose-p:leading-relaxed
+            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+            prose-strong:text-gray-900
+            prose-code:text-sm prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono
+            prose-pre:bg-gray-900 prose-pre:text-gray-100
+            prose-blockquote:border-l-blue-500 prose-blockquote:text-gray-600 prose-blockquote:not-italic
+            prose-table:text-sm prose-th:bg-gray-50 prose-th:text-gray-700
+            prose-img:rounded-lg prose-img:shadow-sm
+            prose-hr:border-gray-200
+            prose-li:text-gray-700
+          "
+        >
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
 
@@ -265,6 +332,7 @@ export default async function GuidePage({ params }: PageProps) {
         <div className="mt-10">
           <CTAQuote variant="banner" />
         </div>
+
       </article>
     </>
   );

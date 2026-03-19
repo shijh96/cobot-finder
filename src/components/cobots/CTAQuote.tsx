@@ -1,14 +1,3 @@
-/**
- * CTAQuote - "Get a Free Quote" call-to-action.
- *
- * Usage:
- *   // Inline variant (in article body)
- *   <CTAQuote variant="inline" />
- *
- *   // Banner variant (full-width section)
- *   <CTAQuote variant="banner" cobotModel="UR5e" cobotBrand="Universal Robots" />
- */
-
 import Link from "next/link";
 
 interface CTAQuoteProps {
@@ -32,25 +21,25 @@ export default function CTAQuote({
   if (variant === "banner") {
     return (
       <section
-        className={`bg-gradient-to-r from-blue-700 to-blue-800 py-12 ${className}`}
+        className={`bg-gray-900 py-10 rounded-xl ${className}`}
         aria-labelledby="cta-quote-heading"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div className="max-w-3xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div>
-            <h2 id="cta-quote-heading" className="text-2xl md:text-3xl font-bold text-white mb-2">
+            <h2 id="cta-quote-heading" className="text-xl font-bold text-white mb-1.5">
               {cobotModel
                 ? `Get a Quote for the ${cobotBrand} ${cobotModel}`
                 : "Get a Free Cobot Quote"}
             </h2>
-            <p className="text-blue-100 text-base max-w-lg">
-              Connect with authorized distributors in your region. No spam, no obligation — just accurate pricing for your application.
+            <p className="text-gray-400 text-sm max-w-md">
+              Connect with authorized distributors in your region. No spam, no obligation.
             </p>
           </div>
           <Link
             href={quoteHref}
-            className="shrink-0 px-8 py-4 rounded-xl bg-orange-500 text-white font-bold text-lg hover:bg-orange-400 transition-colors shadow-lg"
+            className="shrink-0 px-6 py-2.5 rounded-lg bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-colors"
           >
-            Get Free Quote &rarr;
+            Request Quote
           </Link>
         </div>
       </section>
@@ -60,24 +49,24 @@ export default function CTAQuote({
   // Inline variant
   return (
     <aside
-      className={`rounded-2xl border-l-4 border-orange-400 bg-orange-50 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${className}`}
+      className={`rounded-lg border border-blue-200 bg-blue-50/50 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${className}`}
       aria-label="Get a free quote"
     >
       <div>
-        <p className="text-sm font-bold text-gray-900 mb-0.5">
+        <p className="text-sm font-semibold text-gray-900 mb-0.5">
           {cobotModel
             ? `Ready to price the ${cobotBrand} ${cobotModel}?`
-            : "Ready to get pricing for your project?"}
+            : "Need pricing for your project?"}
         </p>
-        <p className="text-sm text-gray-600">
-          Get a free, no-obligation quote from authorized distributors in your region.
+        <p className="text-xs text-gray-500">
+          Free, no-obligation quotes from authorized distributors.
         </p>
       </div>
       <Link
         href={quoteHref}
-        className="shrink-0 px-5 py-2.5 rounded-lg bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition-colors whitespace-nowrap"
+        className="shrink-0 px-4 py-2 rounded-md bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap"
       >
-        Get Free Quote
+        Get Quote
       </Link>
     </aside>
   );

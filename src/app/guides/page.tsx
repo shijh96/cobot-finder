@@ -12,6 +12,19 @@ export const metadata: Metadata = {
   alternates: { canonical: '/guides' },
 };
 
+// Category color map — keeps pills visually distinct without being loud
+const categoryColors: Record<string, string> = {
+  'buying-guide': 'bg-blue-50 text-blue-700',
+  'comparison': 'bg-violet-50 text-violet-700',
+  'roi': 'bg-green-50 text-green-700',
+  'applications': 'bg-amber-50 text-amber-700',
+  'safety': 'bg-red-50 text-red-700',
+};
+
+function categoryColor(cat: string): string {
+  return categoryColors[cat] ?? 'bg-gray-100 text-gray-600';
+}
+
 // ----------------------------------------------------------------
 // Page
 // ----------------------------------------------------------------
@@ -30,27 +43,27 @@ export default async function GuidesPage({
     : allPosts;
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       {/* Header */}
-      <header className="mb-10">
-        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-100">
+      <header className="mb-8 border-b border-gray-200 pb-6">
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
           Cobot Guides &amp; Articles
         </h1>
-        <p className="mt-3 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-          Everything you need to know about collaborative robots &mdash; from
-          fundamentals to in-depth buying guides and ROI analysis.
+        <p className="mt-2 max-w-2xl text-sm text-gray-500">
+          In-depth resources on collaborative robots — comparisons, buying guides, ROI analysis,
+          and application-specific recommendations for manufacturing teams.
         </p>
       </header>
 
-      {/* Category filter */}
+      {/* Category filter pills */}
       {categories.length > 0 && (
-        <nav className="mb-8 flex flex-wrap gap-2" aria-label="Filter by category">
+        <nav className="mb-6 flex flex-wrap gap-2" aria-label="Filter by category">
           <a
             href="/guides"
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
               !activeCategory
                 ? 'bg-blue-600 text-white'
-                : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
             All
@@ -59,48 +72,56 @@ export default async function GuidesPage({
             <a
               key={cat}
               href={`/guides?category=${cat}`}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+              className={`rounded-full px-3 py-1 text-xs font-medium capitalize transition-colors ${
                 activeCategory === cat
                   ? 'bg-blue-600 text-white'
-                  : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
-              {cat}
+              {cat.replace(/-/g, ' ')}
             </a>
           ))}
         </nav>
       )}
 
+      {/* Result count */}
+      <p className="mb-4 text-xs text-gray-400">
+        {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
+        {activeCategory ? ` in "${activeCategory.replace(/-/g, ' ')}"` : ''}
+      </p>
+
       {/* Post grid */}
       {filteredPosts.length === 0 ? (
-        <p className="py-12 text-center text-zinc-500 dark:text-zinc-400">
-          No guides found. Check back soon!
+        <p className="py-12 text-center text-sm text-gray-400">
+          No guides found for this category. Check back soon.
         </p>
       ) : (
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredPosts.map((post) => (
             <a
               key={post.slug}
               href={`/guides/${post.slug}`}
-              className="group flex flex-col rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+              className="group flex flex-col rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-blue-300"
             >
-              {/* Category badge */}
-              <span className="mb-3 w-fit rounded-full bg-blue-50 px-3 py-0.5 text-xs font-medium capitalize text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-                {post.category}
+              {/* Category pill */}
+              <span
+                className={`mb-2.5 w-fit rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${categoryColor(post.category)}`}
+              >
+                {post.category.replace(/-/g, ' ')}
               </span>
 
               {/* Title */}
-              <h2 className="text-lg font-bold text-zinc-900 group-hover:text-blue-600 dark:text-zinc-100 dark:group-hover:text-blue-400">
+              <h2 className="text-base font-semibold leading-snug text-gray-900 group-hover:text-blue-600">
                 {post.title}
               </h2>
 
               {/* Description */}
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500 line-clamp-2">
                 {post.description}
               </p>
 
               {/* Meta */}
-              <div className="mt-4 flex items-center gap-3 text-xs text-zinc-400 dark:text-zinc-500">
+              <div className="mt-3 flex items-center gap-2 text-xs text-gray-400">
                 <time dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString('en-US', {
                     year: 'numeric',
