@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description:
     "Compare collaborative robots from Universal Robots, Fanuc, ABB, KUKA, and more. Side-by-side payload, reach, repeatability, and pricing.",
   alternates: { canonical: "/compare" },
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Compare Cobots — Side-by-Side Spec Comparison",
     description: "Compare collaborative robots from Universal Robots, Fanuc, ABB, KUKA, and more.",

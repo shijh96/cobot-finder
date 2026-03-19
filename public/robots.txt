@@ -3,6 +3,9 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /quote/thank-you
+Disallow: /compare
+Disallow: /brands/
+Disallow: /cobots/
 
 # Host
 Host: https://cobotfinder.com

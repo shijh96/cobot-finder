@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: CobotPageProps): Promise<Meta
     title: `${brandName} ${modelName} Cobot — Specs, Pricing & Review`,
     description: `Full spec sheet, pricing estimate, and use case analysis for the ${brandName} ${modelName} collaborative robot.`,
     alternates: { canonical: `/cobots/${brand}/${model}` },
+    robots: { index: false, follow: true },
     openGraph: {
       title: `${brandName} ${modelName} Cobot — Specs, Pricing & Review`,
       description: `Full spec sheet, pricing estimate, and use case analysis for the ${brandName} ${modelName}.`,
