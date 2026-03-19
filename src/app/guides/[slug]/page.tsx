@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import remarkGfm from 'remark-gfm';
 
 import { getPostBySlug, getAllPostSlugs, getAllPosts } from '@/lib/mdx';
 import CobotCard from '@/components/cobots/CobotCard';
@@ -9,6 +10,7 @@ import CobotCompareTable from '@/components/cobots/CobotCompareTable';
 import CTAQuote from '@/components/cobots/CTAQuote';
 import FAQ from '@/components/cobots/FAQ';
 import { generateBreadcrumbSchema } from '@/lib/seo';
+import { articleData } from '@/data/article-data';
 
 // ----------------------------------------------------------------
 // Custom MDX components available inside every article
@@ -322,7 +324,14 @@ export default async function GuidePage({ params }: PageProps) {
             prose-li:text-gray-700
           "
         >
-          <MDXRemote source={post.content} components={mdxComponents} />
+          <MDXRemote
+            source={post.content}
+            components={mdxComponents}
+            options={{
+              scope: articleData[slug] ?? {},
+              mdxOptions: { remarkPlugins: [remarkGfm] },
+            }}
+          />
         </div>
 
         {/* Related Articles */}
