@@ -126,7 +126,7 @@ function Breadcrumb({ category, title }: { category: string; title: string }) {
   const categoryLabel = category.charAt(0).toUpperCase() + category.slice(1);
   return (
     <nav aria-label="Breadcrumb" className="mb-5">
-      <ol className="flex flex-wrap items-center gap-0.5 text-xs text-gray-400">
+      <ol className="flex flex-wrap items-center gap-0.5 text-xs text-gray-500">
         <li>
           <Link href="/" className="hover:text-gray-600 transition-colors">
             Home
