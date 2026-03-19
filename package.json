@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.2",
+    "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
     "next": "16.1.7",
     "next-mdx-remote": "^6.0.0",
