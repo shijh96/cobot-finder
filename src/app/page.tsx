@@ -211,16 +211,15 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
             {brands.map((brand) => (
-              <Link
+              <div
                 key={brand.name}
-                href={`/brands/${brand.name.toLowerCase().replace(/\s+/g, "-")}`}
-                className="group flex flex-col items-center gap-0.5 hover:opacity-80 transition-opacity"
+                className="flex flex-col items-center gap-0.5"
               >
-                <span className="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">
+                <span className="text-sm font-semibold text-gray-700">
                   {brand.name}
                 </span>
                 <span className="text-xs text-gray-400">{brand.country}</span>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

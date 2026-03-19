@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import CTAQuote from "@/components/cobots/CTAQuote";
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: CobotPageProps): Promise<Meta
 }
 
 export default async function CobotPage({ params }: CobotPageProps) {
+  notFound(); // Placeholder page — not ready for production
   const { brand, model } = await params;
   const brandName = formatName(brand);
   const modelName = model.toUpperCase();

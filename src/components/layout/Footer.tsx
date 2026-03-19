@@ -13,16 +13,13 @@ const footerLinks = {
     { label: "Best Cobot Arms", href: "/guides/best-cobot-arms" },
     { label: "RaaS Guide", href: "/guides/robotics-as-a-service" },
   ],
-  Brands: [
-    { label: "Universal Robots", href: "/brands/universal-robots" },
-    { label: "Fanuc", href: "/brands/fanuc" },
-    { label: "KUKA", href: "/brands/kuka" },
-    { label: "Doosan Robotics", href: "/brands/doosan" },
-    { label: "ABB", href: "/brands/abb" },
-    { label: "Techman Robot", href: "/brands/techman" },
+  "More Guides": [
+    { label: "Robot Fleet Management", href: "/guides/robot-fleet-management" },
+    { label: "RaaS Companies", href: "/guides/robotics-as-a-service-companies" },
+    { label: "Cobot Palletizer", href: "/guides/cobot-palletizer" },
+    { label: "What is a Cobot?", href: "/guides/what-is-a-cobot" },
   ],
   Tools: [
-    { label: "Compare Cobots", href: "/compare" },
     { label: "ROI Calculator", href: "/calculator" },
     { label: "Get a Quote", href: "/quote" },
   ],

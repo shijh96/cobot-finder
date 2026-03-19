@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import CobotCompareTable from "@/components/cobots/CobotCompareTable";
@@ -58,6 +59,7 @@ const sampleCobots: CobotSpec[] = [
 ];
 
 export default function ComparePage() {
+  notFound(); // Placeholder page — not ready for production
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

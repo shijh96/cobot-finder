@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import CTAQuote from "@/components/cobots/CTAQuote";
@@ -36,6 +37,7 @@ export async function generateMetadata({ params }: BrandPageProps): Promise<Meta
 }
 
 export default async function BrandPage({ params }: BrandPageProps) {
+  notFound(); // Placeholder page — not ready for production
   const { brand } = await params;
   const brandName = formatBrandName(brand);
 
