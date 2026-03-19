@@ -96,10 +96,10 @@ export default function CobotCard({
           View Details
         </Link>
         <Link
-          href={`/quote?model=${encodeURIComponent(model)}&brand=${encodeURIComponent(brand)}`}
-          className="flex-1 text-center py-2 rounded-lg border border-orange-400 text-orange-600 text-sm font-semibold hover:bg-orange-50 transition-colors"
+          href="/guides/best-cobot-arms"
+          className="flex-1 text-center py-2 rounded-lg border border-blue-400 text-blue-600 text-sm font-semibold hover:bg-blue-50 transition-colors"
         >
-          Get Quote
+          Compare
         </Link>
       </div>
     </article>

@@ -2,7 +2,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /quote/thank-you
+Disallow: /quote
 Disallow: /compare
 Disallow: /brands/
 Disallow: /cobots/

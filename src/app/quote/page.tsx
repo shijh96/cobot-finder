@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import QuoteForm from "./QuoteForm";
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function QuotePage() {
+  notFound(); // Not ready — no distributor network yet
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

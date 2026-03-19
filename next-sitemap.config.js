@@ -14,6 +14,7 @@ module.exports = {
     "/terms",
     "/contact",
     "/compare",
+    "/quote",
     "/brands/*",
     "/cobots/*",
   ],
@@ -30,11 +31,6 @@ module.exports = {
       priority: 0.9,
       changefreq: "monthly",
     },
-    {
-      loc: "/quote",
-      priority: 0.8,
-      changefreq: "monthly",
-    },
   ],
 
   robotsTxtOptions: {
@@ -42,7 +38,7 @@ module.exports = {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/quote/thank-you", "/compare", "/brands/", "/cobots/"],
+        disallow: ["/api/", "/quote", "/compare", "/brands/", "/cobots/"],
       },
     ],
   },

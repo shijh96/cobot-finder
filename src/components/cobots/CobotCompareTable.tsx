@@ -147,14 +147,14 @@ export default function CobotCompareTable({ cobots = [], className = "" }: Cobot
         {/* CTA footer */}
         <tfoot>
           <tr className="bg-gray-50 border-t border-gray-200">
-            <td className="px-4 py-3 text-xs text-gray-400">Get a quote</td>
+            <td className="px-4 py-3 text-xs text-gray-400">Learn more</td>
             {cobots.map((cobot, i) => (
               <td key={i} className="px-4 py-3 text-center">
                 <Link
-                  href={`/quote?model=${encodeURIComponent(cobot.model)}&brand=${encodeURIComponent(cobot.brand)}`}
-                  className="inline-block px-4 py-1.5 rounded-lg bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition-colors"
+                  href="/guides/best-cobot-arms"
+                  className="inline-block px-4 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
                 >
-                  Get Quote
+                  Compare
                 </Link>
               </td>
             ))}

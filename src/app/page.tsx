@@ -85,10 +85,10 @@ export default function HomePage() {
                 Browse Guides
               </Link>
               <Link
-                href="/quote"
+                href="/calculator"
                 className="px-4 py-2 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors"
               >
-                Get Quote
+                ROI Calculator
               </Link>
             </div>
           </div>
@@ -232,14 +232,14 @@ export default function HomePage() {
             Ready to automate your production line?
           </h2>
           <p className="text-gray-400 text-sm mb-6 max-w-lg mx-auto">
-            Tell us about your application and get matched with authorized distributors in your region — free, no obligation.
+            Explore our in-depth guides, calculate your ROI, and find the right cobot for your application.
           </p>
           <div className="flex items-center justify-center gap-3">
             <Link
-              href="/quote"
+              href="/guides"
               className="px-5 py-2.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-500 transition-colors"
             >
-              Get a Free Quote
+              Browse Guides
             </Link>
             <Link
               href="/guides"

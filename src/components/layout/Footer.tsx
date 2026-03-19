@@ -21,7 +21,6 @@ const footerLinks = {
   ],
   Tools: [
     { label: "ROI Calculator", href: "/calculator" },
-    { label: "Get a Quote", href: "/quote" },
   ],
 };
 

@@ -57,10 +57,10 @@ export default function Header() {
             ))}
             <div className="w-px h-5 bg-gray-200 mx-2" />
             <Link
-              href="/quote"
+              href="/guides"
               className="px-3.5 py-1.5 rounded-md bg-blue-600 text-white text-[13px] font-semibold hover:bg-blue-700 transition-colors"
             >
-              Get Quote
+              Browse Guides
             </Link>
           </nav>
 
@@ -92,11 +92,11 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/quote"
+              href="/guides"
               onClick={() => setMobileOpen(false)}
               className="mt-1 px-3 py-2.5 rounded-md bg-blue-600 text-white text-sm font-semibold text-center hover:bg-blue-700 transition-colors"
             >
-              Get Quote
+              Browse Guides
             </Link>
           </nav>
         </div>
