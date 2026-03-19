@@ -125,7 +125,7 @@ export default function HomePage() {
               >
                 <div className="flex items-center gap-2 mb-3">
                   <span className={`w-2 h-2 rounded-full ${useCase.color}`} />
-                  <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                     Cobots for {useCase.label}
                   </h3>
                 </div>
