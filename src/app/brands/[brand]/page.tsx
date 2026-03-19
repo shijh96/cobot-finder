@@ -24,6 +24,13 @@ export async function generateMetadata({ params }: BrandPageProps): Promise<Meta
   return {
     title: `${brandName} Cobots — Full Model Lineup & Specs`,
     description: `Browse all ${brandName} collaborative robots. Compare payload, reach, and pricing to find the right model for your application.`,
+    alternates: { canonical: `/brands/${brand}` },
+    openGraph: {
+      title: `${brandName} Cobots — Full Model Lineup & Specs`,
+      description: `Browse all ${brandName} collaborative robots. Compare payload, reach, and pricing.`,
+      type: 'website',
+    },
+    twitter: { card: 'summary_large_image' },
   };
 }
 

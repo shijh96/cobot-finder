@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Get a Free Cobot Quote — Connect with Authorized Distributors",
   description:
     "Tell us about your cobot application and get matched with authorized distributors in your region. Free, no obligation.",
+  alternates: { canonical: "/quote" },
+  openGraph: {
+    title: "Get a Free Cobot Quote — Connect with Authorized Distributors",
+    description: "Get matched with authorized cobot distributors in your region. Free, no obligation.",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function QuotePage() {

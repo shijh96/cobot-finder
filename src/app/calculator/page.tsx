@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Cobot ROI Calculator — Estimate Payback Period & Annual Savings",
   description:
     "Free cobot ROI calculator. Enter your labor costs, production hours, and cobot price to estimate payback period and 5-year net savings.",
+  alternates: { canonical: "/calculator" },
+  openGraph: {
+    title: "Cobot ROI Calculator — Estimate Payback Period & Annual Savings",
+    description: "Free cobot ROI calculator. Estimate payback period and 5-year net savings.",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function CalculatorPage() {

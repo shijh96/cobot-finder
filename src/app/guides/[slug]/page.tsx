@@ -3,12 +3,17 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
 
 import { getPostBySlug, getAllPostSlugs, getAllPosts } from '@/lib/mdx';
 import CobotCard from '@/components/cobots/CobotCard';
 import CobotCompareTable from '@/components/cobots/CobotCompareTable';
 import CTAQuote from '@/components/cobots/CTAQuote';
 import FAQ from '@/components/cobots/FAQ';
+import Callout from '@/components/cobots/Callout';
+import KeyStat from '@/components/cobots/KeyStat';
+import TableOfContents from '@/components/cobots/TableOfContents';
+import StickyTOC from '@/components/cobots/StickyTOC';
 import { generateBreadcrumbSchema } from '@/lib/seo';
 import { articleData } from '@/data/article-data';
 
@@ -21,6 +26,9 @@ const mdxComponents = {
   CobotCompareTable,
   CTAQuote,
   FAQ,
+  Callout,
+  KeyStat,
+  TableOfContents,
 };
 
 // ----------------------------------------------------------------
@@ -91,7 +99,7 @@ function ArticleJsonLd({
     datePublished: date,
     dateModified: date,
     url: `https://cobotfinder.com/guides/${slug}`,
-    image: image || 'https://cobotfinder.com/og-default.jpg',
+    image: image ? `https://cobotfinder.com${image}` : undefined,
     author: {
       '@type': 'Organization',
       name: 'Cobot Finder',
@@ -269,80 +277,91 @@ export default async function GuidePage({ params }: PageProps) {
         }}
       />
 
-      <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="xl:flex xl:justify-center xl:gap-10 xl:px-8">
 
-        {/* Breadcrumb */}
-        <Breadcrumb category={post.category} title={post.title} />
+        {/* Sticky sidebar TOC — desktop only */}
+        <aside className="hidden xl:block xl:w-52 xl:shrink-0 py-10">
+          <div className="sticky top-24">
+            <StickyTOC />
+          </div>
+        </aside>
 
-        {/* Header */}
-        <header className="mb-8 pb-7 border-b border-gray-200">
-          {/* Meta row: category badge + reading time + date */}
-          <div className="mb-3 flex flex-wrap items-center gap-2">
-            <Link
-              href={`/guides?category=${post.category}`}
-              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset transition-opacity hover:opacity-80 ${categoryBadgeClasses(post.category)}`}
-            >
-              {categoryLabel}
-            </Link>
-            <span className="text-gray-300" aria-hidden="true">|</span>
-            <span className="text-xs text-gray-500">{post.readingTime}</span>
-            <span className="text-gray-300" aria-hidden="true">|</span>
-            <time
-              dateTime={post.date}
-              className="text-xs text-gray-500"
-            >
-              {formattedDate}
-            </time>
+        <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 xl:mx-0">
+
+          {/* Breadcrumb */}
+          <Breadcrumb category={post.category} title={post.title} />
+
+          {/* Header */}
+          <header className="mb-8 pb-7 border-b border-gray-200">
+            {/* Meta row: category badge + reading time + date */}
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <Link
+                href={`/guides?category=${post.category}`}
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ring-1 ring-inset transition-opacity hover:opacity-80 ${categoryBadgeClasses(post.category)}`}
+              >
+                {categoryLabel}
+              </Link>
+              <span className="text-gray-300" aria-hidden="true">|</span>
+              <span className="text-xs text-gray-500">{post.readingTime}</span>
+              <span className="text-gray-300" aria-hidden="true">|</span>
+              <time
+                dateTime={post.date}
+                className="text-xs text-gray-500"
+              >
+                {formattedDate}
+              </time>
+            </div>
+
+            {/* Title */}
+            <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 leading-snug sm:text-3xl">
+              {post.title}
+            </h1>
+
+            {/* Description */}
+            <p className="mt-3 text-sm leading-relaxed text-gray-500 sm:text-base">
+              {post.description}
+            </p>
+          </header>
+
+          {/* MDX body */}
+          <div
+            className="
+              prose prose-gray max-w-none
+              prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-gray-900
+              prose-h2:text-xl prose-h3:text-lg
+              prose-p:text-gray-700 prose-p:leading-relaxed
+              prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+              prose-strong:text-gray-900
+              prose-code:text-sm prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono
+              prose-pre:bg-gray-900 prose-pre:text-gray-100
+              prose-blockquote:border-l-blue-500 prose-blockquote:text-gray-600 prose-blockquote:not-italic
+              prose-table:text-sm prose-th:bg-gray-50 prose-th:text-gray-700
+              prose-img:rounded-lg prose-img:shadow-sm
+              prose-hr:border-gray-200
+              prose-li:text-gray-700
+            "
+          >
+            <MDXRemote
+              source={post.content}
+              components={mdxComponents}
+              options={{
+                scope: articleData[slug] ?? {},
+                mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] },
+                blockJS: false,
+              }}
+            />
           </div>
 
-          {/* Title */}
-          <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 leading-snug sm:text-3xl">
-            {post.title}
-          </h1>
+          {/* Related Articles */}
+          <RelatedArticles currentSlug={slug} currentCategory={post.category} />
 
-          {/* Description */}
-          <p className="mt-3 text-sm leading-relaxed text-gray-500 sm:text-base">
-            {post.description}
-          </p>
-        </header>
+          {/* Bottom CTA */}
+          <div className="mt-10">
+            <CTAQuote variant="banner" />
+          </div>
 
-        {/* MDX body */}
-        <div
-          className="
-            prose prose-gray max-w-none
-            prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-gray-900
-            prose-h2:text-xl prose-h3:text-lg
-            prose-p:text-gray-700 prose-p:leading-relaxed
-            prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-            prose-strong:text-gray-900
-            prose-code:text-sm prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono
-            prose-pre:bg-gray-900 prose-pre:text-gray-100
-            prose-blockquote:border-l-blue-500 prose-blockquote:text-gray-600 prose-blockquote:not-italic
-            prose-table:text-sm prose-th:bg-gray-50 prose-th:text-gray-700
-            prose-img:rounded-lg prose-img:shadow-sm
-            prose-hr:border-gray-200
-            prose-li:text-gray-700
-          "
-        >
-          <MDXRemote
-            source={post.content}
-            components={mdxComponents}
-            options={{
-              scope: articleData[slug] ?? {},
-              mdxOptions: { remarkPlugins: [remarkGfm] },
-            }}
-          />
-        </div>
-
-        {/* Related Articles */}
-        <RelatedArticles currentSlug={slug} currentCategory={post.category} />
-
-        {/* Bottom CTA */}
-        <div className="mt-10">
-          <CTAQuote variant="banner" />
-        </div>
-
-      </article>
+        </article>
+      </div>
     </>
   );
 }

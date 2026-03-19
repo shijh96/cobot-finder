@@ -18,6 +18,13 @@ export async function generateMetadata({ params }: CobotPageProps): Promise<Meta
   return {
     title: `${brandName} ${modelName} Cobot — Specs, Pricing & Review`,
     description: `Full spec sheet, pricing estimate, and use case analysis for the ${brandName} ${modelName} collaborative robot.`,
+    alternates: { canonical: `/cobots/${brand}/${model}` },
+    openGraph: {
+      title: `${brandName} ${modelName} Cobot — Specs, Pricing & Review`,
+      description: `Full spec sheet, pricing estimate, and use case analysis for the ${brandName} ${modelName}.`,
+      type: 'article',
+    },
+    twitter: { card: 'summary_large_image' },
   };
 }
 

@@ -28,17 +28,28 @@ html {
 /* ─── Enhanced Prose for MDX Articles ─── */
 
 .prose h2 {
-  margin-top: 2.5em;
+  margin-top: 3.5em;
   margin-bottom: 0.75em;
+  padding-top: 2em;
   padding-bottom: 0.5em;
-  border-bottom: 1px solid #e5e7eb;
+  border-top: 2px solid #e5e7eb;
+  border-bottom: none;
   font-weight: 800;
   letter-spacing: -0.02em;
+  scroll-margin-top: 5rem;
+}
+
+/* First h2 in article doesn't need extra top separation */
+.prose h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
 }
 
 .prose h3 {
   margin-top: 2em;
   font-weight: 700;
+  scroll-margin-top: 5rem;
 }
 
 .prose table {

@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: "Compare Cobots — Side-by-Side Spec Comparison",
   description:
     "Compare collaborative robots from Universal Robots, Fanuc, ABB, KUKA, and more. Side-by-side payload, reach, repeatability, and pricing.",
+  alternates: { canonical: "/compare" },
+  openGraph: {
+    title: "Compare Cobots — Side-by-Side Spec Comparison",
+    description: "Compare collaborative robots from Universal Robots, Fanuc, ABB, KUKA, and more.",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 // Sample data for demonstration
