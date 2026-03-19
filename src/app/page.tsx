@@ -96,7 +96,7 @@ export default function HomePage() {
 
         {/* Stats bar */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-200">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg grid grid-cols-2 md:grid-cols-4 md:divide-x divide-gray-200">
             {stats.map((stat) => (
               <div key={stat.label} className="px-6 py-4 text-center">
                 <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
@@ -163,7 +163,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/guides"
-              className="hidden md:block text-sm text-blue-600 font-medium hover:underline"
+              className="hidden md:block text-sm text-blue-600 font-medium hover:underline py-1 px-2 -mr-2"
             >
               View all &rarr;
             </Link>
